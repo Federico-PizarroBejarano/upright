@@ -41,8 +41,5 @@ def draw_curve(waypoints, rgb=(1, 0, 0), dist=0.05, linewidth=1, dashed=False):
         start = visual_points[i]
         end = visual_points[i + 1]
         pyb.addUserDebugLine(
-            list(start),
-            list(end),
-            lineColorRGB=rgb,
-            lineWidth=linewidth,
+            list(start), list(end), lineColorRGB=rgb, lineWidth=linewidth
         )

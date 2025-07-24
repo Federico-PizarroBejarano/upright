@@ -215,10 +215,8 @@ def run_simulation(config, video, logname, use_gui=True):
             if model.settings.balancing_settings.enabled:
                 model.update(x, u)
                 logger.append("contact_forces", f)
-                object_dynamics_constraints = (
-                    ctrl_manager.mpc.getStateInputEqualityConstraintValue(
-                        "object_dynamics", t, x, u
-                    )
+                object_dynamics_constraints = ctrl_manager.mpc.getStateInputEqualityConstraintValue(
+                    "object_dynamics", t, x, u
                 )
                 logger.append(
                     "object_dynamics_constraints", object_dynamics_constraints
@@ -326,12 +324,7 @@ def max_min_eig_inertia(box, com, diag=True):
     Hc = J[:3, :3] - np.outer(com, com)  # Hc is about the CoM
     λ = cp.Variable(1)
     objective = cp.Maximize(λ)
-    drip_constraints = [
-        Hc >> 0,
-        cp.sum(μs) == 1,
-        μs >= 0,
-        λ >= 0,
-    ]
+    drip_constraints = [Hc >> 0, cp.sum(μs) == 1, μs >= 0, λ >= 0]
 
     # if diag=True, only optimize over the diagonal of I
     if diag:
@@ -385,28 +378,15 @@ def max_trace_inertia(box, com, about_com=True):
 def make_arrangement_config(object_names, x_offset, mu):
     """Generate the config the arrangement of objects."""
     objects_config = [
-        {
-            "name": name,
-            "type": name,
-            "parent": "ee",
-            "offset": {"x": x_offset},
-        }
+        {"name": name, "type": name, "parent": "ee", "offset": {"x": x_offset}}
         for name in object_names
     ]
     contacts_config = [
-        {
-            "first": "ee",
-            "second": name,
-            "mu": mu,
-            "support_area_inset": 0.0,
-        }
+        {"first": "ee", "second": name, "mu": mu, "support_area_inset": 0.0}
         for name in object_names
     ]
 
-    return {
-        "objects": objects_config,
-        "contacts": contacts_config,
-    }
+    return {"objects": objects_config, "contacts": contacts_config}
 
 
 def main():
@@ -459,14 +439,8 @@ def main():
         "side_lengths": [0.15, 0.15, h_m],
         "color": [1, 0, 0, 1],
         "bounds": {
-            "approx": {
-                "com_lower": [-b, -b, -h2_m],
-                "com_upper": [b, b, h2_m],
-            },
-            "realizable": {
-                "com_lower": [-b, -b, -h2_m],
-                "com_upper": [b, b, h2_m],
-            },
+            "approx": {"com_lower": [-b, -b, -h2_m], "com_upper": [b, b, h2_m]},
+            "realizable": {"com_lower": [-b, -b, -h2_m], "com_upper": [b, b, h2_m]},
         },
     }
 
@@ -579,7 +553,10 @@ def main():
         # config["simulation"]["extra_gui"] = True
         run_simulation(
             # config=config, video=f"{args.com}_h{h_cm}", logname=None, use_gui=True
-            config=config, video=None, logname=None, use_gui=True
+            config=config,
+            video=None,
+            logname=None,
+            use_gui=True,
         )
         return
 

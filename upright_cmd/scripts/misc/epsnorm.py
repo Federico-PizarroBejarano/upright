@@ -8,9 +8,10 @@ def epsnorm_high(x, ε):
     """Always larger than ||x||"""
     return np.sqrt(x @ x + ε)
 
+
 def epsnorm_low(x, ε):
     """Always smaller than ||x||"""
-    return epsnorm_high(x, ε**2) - ε
+    return epsnorm_high(x, ε ** 2) - ε
 
 
 def main():
@@ -30,7 +31,7 @@ def main():
     d_min = 0.1
     d = np.linspace(-0.5, 2, 500)
     y1 = d - d_min
-    y2 = np.sign(d) * np.sqrt(d**2 + d_min**2) - d_min
+    y2 = np.sign(d) * np.sqrt(d ** 2 + d_min ** 2) - d_min
 
     plt.plot(d, y1, label="y1")
     plt.plot(d, y2, label="y2")

@@ -22,7 +22,11 @@ def remove_named_markers(msgs):
 
 
 def marker_xyz(marker_msg):
-    return [marker_msg.translation.x, marker_msg.translation.y, marker_msg.translation.z]
+    return [
+        marker_msg.translation.x,
+        marker_msg.translation.y,
+        marker_msg.translation.z,
+    ]
 
 
 def main():

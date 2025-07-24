@@ -136,15 +136,10 @@ class BulletBody:
         box = polyhedron.ConvexPolyhedron.box(half_extents)
 
         collision_uid = pyb.createCollisionShape(
-            shapeType=pyb.GEOM_CYLINDER,
-            radius=radius,
-            height=height,
+            shapeType=pyb.GEOM_CYLINDER, radius=radius, height=height
         )
         visual_uid = pyb.createVisualShape(
-            shapeType=pyb.GEOM_CYLINDER,
-            radius=radius,
-            length=height,
-            rgbaColor=color,
+            shapeType=pyb.GEOM_CYLINDER, radius=radius, length=height, rgbaColor=color
         )
         return BulletBody(
             mass=mass,
@@ -171,13 +166,10 @@ class BulletBody:
         box = polyhedron.ConvexPolyhedron.box(half_extents)
 
         collision_uid = pyb.createCollisionShape(
-            shapeType=pyb.GEOM_BOX,
-            halfExtents=tuple(half_extents),
+            shapeType=pyb.GEOM_BOX, halfExtents=tuple(half_extents)
         )
         visual_uid = pyb.createVisualShape(
-            shapeType=pyb.GEOM_BOX,
-            halfExtents=tuple(half_extents),
-            rgbaColor=color,
+            shapeType=pyb.GEOM_BOX, halfExtents=tuple(half_extents), rgbaColor=color
         )
         return BulletBody(
             mass=mass,
@@ -205,13 +197,10 @@ class BulletBody:
         box = polyhedron.ConvexPolyhedron.box(half_extents)
 
         collision_uid = pyb.createCollisionShape(
-            shapeType=pyb.GEOM_SPHERE,
-            radius=radius,
+            shapeType=pyb.GEOM_SPHERE, radius=radius
         )
         visual_uid = pyb.createVisualShape(
-            shapeType=pyb.GEOM_SPHERE,
-            radius=radius,
-            rgbaColor=color,
+            shapeType=pyb.GEOM_SPHERE, radius=radius, rgbaColor=color
         )
         return BulletBody(
             mass=mass,
@@ -389,7 +378,7 @@ class BulletDynamicObstacle:
     def _desired_state(self, t):
         t0, r0, v0, a0 = self._initial_mode_values()
         dt = t - t0
-        rd = r0 + dt * v0 + 0.5 * dt**2 * a0
+        rd = r0 + dt * v0 + 0.5 * dt ** 2 * a0
         vd = v0 + dt * a0
         return rd, vd
 
@@ -441,8 +430,7 @@ class EEObject:
         self.side_lengths = side_lengths
         self.mu = 1.0
         self.box = polyhedron.ConvexPolyhedron.box(0.5 * self.side_lengths).transform(
-            translation=self.r0,
-            rotation=orientation,
+            translation=self.r0, rotation=orientation
         )
 
     @property

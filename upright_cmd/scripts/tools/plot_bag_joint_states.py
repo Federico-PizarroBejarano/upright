@@ -70,15 +70,15 @@ def main():
     xms_aligned = np.array(ros_utils.interpolate_list(ts, tms, xms))
     ums_aligned = np.array(ros_utils.interpolate_list(ts, tms, ums))
     qs_obs = xms_aligned[:, :n]
-    vs_obs = xms_aligned[:, n:2*n]
-    as_obs = xms_aligned[:, 2*n:3*n]
+    vs_obs = xms_aligned[:, n : 2 * n]
+    as_obs = xms_aligned[:, 2 * n : 3 * n]
     us_obs = ums_aligned[:, :n]
 
     # align MPC optimal trajectory
     xps_aligned = np.array(ros_utils.interpolate_list(ts, tps, xps))
     qs_plan = xps_aligned[:, :n]
-    vs_plan = xps_aligned[:, n:2*n]
-    as_plan = xps_aligned[:, 2*n:3*n]
+    vs_plan = xps_aligned[:, n : 2 * n]
+    as_plan = xps_aligned[:, 2 * n : 3 * n]
 
     ts -= ts[0]
 
@@ -98,7 +98,13 @@ def main():
     for i in range(n):
         plt.plot(ts, qs_obs[:, i], label=f"$\hat{{q}}_{i+1}$")
     for i in range(n):
-        plt.plot(ts, qs_plan[:, i], label=f"$q^{{plan}}_{i+1}$", linestyle="--", color=colors[i])
+        plt.plot(
+            ts,
+            qs_plan[:, i],
+            label=f"$q^{{plan}}_{i+1}$",
+            linestyle="--",
+            color=colors[i],
+        )
     plt.title("Estimated Joint Positions")
     plt.xlabel("Time (s)")
     plt.ylabel("Joint position")
@@ -127,7 +133,13 @@ def main():
     for i in range(n):
         plt.plot(ts, vs_obs[:, i], label=f"$\hat{{v}}_{i+1}$")
     for i in range(n):
-        plt.plot(ts, vs_plan[:, i], label=f"$v^{{plan}}_{i+1}$", linestyle="--", color=colors[i])
+        plt.plot(
+            ts,
+            vs_plan[:, i],
+            label=f"$v^{{plan}}_{i+1}$",
+            linestyle="--",
+            color=colors[i],
+        )
     plt.title("Estimated and Planned Joint Velocity")
     plt.xlabel("Time (s)")
     plt.ylabel("Joint velocity")
@@ -147,7 +159,13 @@ def main():
     for i in range(n):
         plt.plot(ts, as_obs[:, i], label=f"$\hat{{a}}_{i+1}$")
     for i in range(n):
-        plt.plot(ts, as_plan[:, i], label=f"$a^{{plan}}_{i+1}$", linestyle="--", color=colors[i])
+        plt.plot(
+            ts,
+            as_plan[:, i],
+            label=f"$a^{{plan}}_{i+1}$",
+            linestyle="--",
+            color=colors[i],
+        )
     plt.title("Estimated Joint Acceleration")
     plt.xlabel("Time (s)")
     plt.ylabel("Joint acceleration")

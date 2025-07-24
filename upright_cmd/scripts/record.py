@@ -31,7 +31,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("config_path", help="Path to config file")
     parser.add_argument("--name", help="Name to be prepended to directory.")
-    parser.add_argument("--notes", help="Additional information written to notes.txt inside the directory.")
+    parser.add_argument(
+        "--notes",
+        help="Additional information written to notes.txt inside the directory.",
+    )
     args = parser.parse_args()
 
     # create the log directory

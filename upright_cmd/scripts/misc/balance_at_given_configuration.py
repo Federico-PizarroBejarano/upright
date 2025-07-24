@@ -39,13 +39,13 @@ def main():
     Wa = 0.01 * np.eye(dims.robot.v)
 
     def objective(va):
-        Δv = v_nom - va[:dims.robot.v]
-        Δa = a_nom - va[dims.robot.v:]
+        Δv = v_nom - va[: dims.robot.v]
+        Δa = a_nom - va[dims.robot.v :]
         return 0.5 * (Δv @ Wv @ Δv + Δa @ Wa @ Δa)
 
     def objective_jac(va):
-        Δv = v_nom - va[:dims.robot.v]
-        Δa = a_nom - va[dims.robot.v:]
+        Δv = v_nom - va[: dims.robot.v]
+        Δa = a_nom - va[dims.robot.v :]
         return np.concatenate((Wv @ Δv, Wa @ Δa))
 
     # def objective_hess(x):
@@ -68,13 +68,11 @@ def main():
         x = np.concatenate((q_nom, va))
         approx = balancing_constraint_wrapper.getLinearApproximation(0, x, u_nom)
         # don't include derivative w.r.t. q
-        return approx.dfdx[:, dims.robot.q:]
+        return approx.dfdx[:, dims.robot.q :]
 
     # optimize v, a leaving q fixed at the nominal configuration s.t. balancing
     # constraints, where we want v, a to be as close to zero as possible
-    cons = [
-        {"type": "ineq", "fun": constraint, "jac": constraint_jac},
-    ]
+    cons = [{"type": "ineq", "fun": constraint, "jac": constraint_jac}]
     t1 = time.time()
     res = minimize(
         objective,

@@ -274,23 +274,17 @@ def test_clip_line_segment_with_half_space():
     normal = np.array([-1, 0])
 
     # clip the line
-    new_vs = core.polyhedron.clip_line_segment_with_half_space(
-        v1, v2, point, normal
-    )
+    new_vs = core.polyhedron.clip_line_segment_with_half_space(v1, v2, point, normal)
     assert np.allclose(new_vs, [[0, 0], [1, 0]])
 
     # no intersection and the segment is kept
     point = np.array([3, 0])
-    new_vs = core.polyhedron.clip_line_segment_with_half_space(
-        v1, v2, point, normal
-    )
+    new_vs = core.polyhedron.clip_line_segment_with_half_space(v1, v2, point, normal)
     assert np.allclose(new_vs, [v1, v2])
 
     # no intersection and the segment is discarded
     point = np.array([-1, 0])
-    new_vs = core.polyhedron.clip_line_segment_with_half_space(
-        v1, v2, point, normal
-    )
+    new_vs = core.polyhedron.clip_line_segment_with_half_space(v1, v2, point, normal)
     assert new_vs == ()
 
 

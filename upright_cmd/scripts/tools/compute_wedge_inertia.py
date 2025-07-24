@@ -8,6 +8,7 @@ import IPython
 def skew(v):
     return sympy.Matrix([[0, -v[2], v[1]], [v[2], 0, -v[0]], [-v[1], v[0], 0]])
 
+
 r = sympy.symbols("x,y,z")
 x, y, z = r
 h = sympy.symbols("hx,hy,hz")  # half extents
@@ -32,7 +33,7 @@ J = A.integrate(
 J.simplify()
 
 # convert to numpy array with particular values
-Jr = J.subs({h[0] : 0.09, h[1]: 0.103, h[2]: 0.038})
+Jr = J.subs({h[0]: 0.09, h[1]: 0.103, h[2]: 0.038})
 Jr = np.array(Jr).astype(np.float64)
 d, C = np.linalg.eig(Jr)
 

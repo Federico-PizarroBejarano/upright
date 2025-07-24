@@ -117,7 +117,7 @@ def main():
             # it appears to be desirable to open-loop integrate velocity like this
             # to avoid PyBullet not handling velocity commands accurately at very
             # small values
-            v_cmd = v_cmd + env.timestep * a_est + 0.5 * env.timestep**2 * u_cmd
+            v_cmd = v_cmd + env.timestep * a_est + 0.5 * env.timestep ** 2 * u_cmd
             a_est = a_est + env.timestep * u_cmd
         else:
             v_cmd = np.zeros(dims.robot.u)
@@ -154,10 +154,8 @@ def main():
             logger.append("orn_err", model.angle_between_acc_and_normal())
 
             if model.settings.inertial_alignment_settings.constraint_enabled:
-                alignment_constraints = (
-                    ctrl_manager.mpc.getStateInputInequalityConstraintValue(
-                        "inertial_alignment_constraint", t, x, u
-                    )
+                alignment_constraints = ctrl_manager.mpc.getStateInputInequalityConstraintValue(
+                    "inertial_alignment_constraint", t, x, u
                 )
                 logger.append("alignment_constraints", alignment_constraints)
 
@@ -172,26 +170,20 @@ def main():
                     model.settings.obstacle_settings.constraint_type
                     == ctrl.bindings.ConstraintType.Soft
                 ):
-                    obs_constraints = (
-                        ctrl_manager.mpc.getSoftStateInequalityConstraintValue(
-                            "obstacle_avoidance", t, x
-                        )
+                    obs_constraints = ctrl_manager.mpc.getSoftStateInequalityConstraintValue(
+                        "obstacle_avoidance", t, x
                     )
                 else:
-                    obs_constraints = (
-                        ctrl_manager.mpc.getStateInputInequalityConstraintValue(
-                            "obstacle_avoidance", t, x, u
-                        )
+                    obs_constraints = ctrl_manager.mpc.getStateInputInequalityConstraintValue(
+                        "obstacle_avoidance", t, x, u
                     )
                 logger.append("collision_pair_distances", obs_constraints)
 
             # TODO eventually it would be nice to also compute this directly
             # via the core library
             if model.settings.balancing_settings.enabled:
-                object_dynamics_constraints = (
-                    ctrl_manager.mpc.getStateInputEqualityConstraintValue(
-                        "object_dynamics", t, x, u
-                    )
+                object_dynamics_constraints = ctrl_manager.mpc.getStateInputEqualityConstraintValue(
+                    "object_dynamics", t, x, u
                 )
                 logger.append("cost", ctrl_manager.mpc.cost(t, x, u))
 
@@ -199,10 +191,8 @@ def main():
                 # if we are frictionless, then the forces just all need to be
                 # non-negative
                 if dims.nf == 3:
-                    contact_force_constraints = (
-                        ctrl_manager.mpc.getStateInputInequalityConstraintValue(
-                            "contact_forces", t, x, u
-                        )
+                    contact_force_constraints = ctrl_manager.mpc.getStateInputInequalityConstraintValue(
+                        "contact_forces", t, x, u
                     )
                     logger.append(
                         "contact_force_constraints", contact_force_constraints

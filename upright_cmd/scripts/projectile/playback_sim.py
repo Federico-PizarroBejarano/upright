@@ -181,9 +181,7 @@ def main():
 
         # set real ball position
         pyb.resetBasePositionAndOrientation(
-            projectile.body.uid,
-            list(ball_positions_aligned[i, :]),
-            [0, 0, 0, 1],
+            projectile.body.uid, list(ball_positions_aligned[i, :]), [0, 0, 0, 1]
         )
 
         # set estimated ball position

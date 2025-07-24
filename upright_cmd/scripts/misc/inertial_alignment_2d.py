@@ -40,14 +40,14 @@ k = (B.T @ P / R[0, 0]).flatten()
 
 while t < DURATION:
     u_prime = k @ (sd - s)
-    u = u_prime * np.cos(angle)**2 / G - 2*np.tan(angle)*angle_dot**2
+    u = u_prime * np.cos(angle) ** 2 / G - 2 * np.tan(angle) * angle_dot ** 2
 
     # integrate angle
     angle_dot += DT * u
     angle += DT * angle_dot
 
     # integrate x
-    x_dddot = G / np.cos(angle)**2 * angle_dot
+    x_dddot = G / np.cos(angle) ** 2 * angle_dot
     x_ddot = G * np.tan(angle)
     x_dot += DT * x_ddot
     x += DT * x_dot

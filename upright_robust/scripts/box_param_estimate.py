@@ -12,9 +12,7 @@ BOX2_MASS = 1.046 - BASE_BOARD_MASS - BOTTLE_MASS - BOX1_MASS
 base_board = rg.Box.from_side_lengths(
     side_lengths=[0.15, 0.15, 0.005], center=[0, 0, 0.0025]
 )
-box1 = rg.Box.from_side_lengths(
-    side_lengths=[0.15, 0.15, 0.28], center=[0, 0, 0.14]
-)
+box1 = rg.Box.from_side_lengths(side_lengths=[0.15, 0.15, 0.28], center=[0, 0, 0.14])
 box2 = box1.transform(translation=[0, 0, 0.28])
 bottle = rg.Cylinder(radius=0.0375, length=0.2)
 

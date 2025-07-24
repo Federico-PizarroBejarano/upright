@@ -119,9 +119,15 @@ class ControllerSettings(bindings.ControllerSettings):
         self.sqp.hpipm.warm_start = config["sqp"]["hpipm"]["warm_start"]
         self.sqp.hpipm.iter_max = config["sqp"]["hpipm"]["iter_max"]
         self.sqp.hpipm.slacks.enabled = config["sqp"]["hpipm"]["slacks"]["enabled"]
-        self.sqp.hpipm.slacks.input_box = config["sqp"]["hpipm"]["slacks"].get("input_box", True)
-        self.sqp.hpipm.slacks.state_box = config["sqp"]["hpipm"]["slacks"].get("state_box", True)
-        self.sqp.hpipm.slacks.poly_ineq = config["sqp"]["hpipm"]["slacks"].get("poly_ineq", True)
+        self.sqp.hpipm.slacks.input_box = config["sqp"]["hpipm"]["slacks"].get(
+            "input_box", True
+        )
+        self.sqp.hpipm.slacks.state_box = config["sqp"]["hpipm"]["slacks"].get(
+            "state_box", True
+        )
+        self.sqp.hpipm.slacks.poly_ineq = config["sqp"]["hpipm"]["slacks"].get(
+            "poly_ineq", True
+        )
 
         self.sqp.hpipm.slacks.upper_L2_penalty = config["sqp"]["hpipm"]["slacks"].get(
             "upper_L2_penalty", 100
@@ -356,8 +362,8 @@ class ControllerSettings(bindings.ControllerSettings):
             ]
 
             if "urdf" in config["obstacles"]:
-                self.obstacle_settings.obstacle_urdf_path = (
-                    core.parsing.parse_and_compile_urdf(config["obstacles"]["urdf"])
+                self.obstacle_settings.obstacle_urdf_path = core.parsing.parse_and_compile_urdf(
+                    config["obstacles"]["urdf"]
                 )
 
             if "dynamic" in config["obstacles"]:
@@ -422,6 +428,7 @@ class ControllerSettings(bindings.ControllerSettings):
         if self.dynamic_obstacle_settings.enabled:
             return len(self.dynamic_obstacle_settings.collision_spheres)
         return 0
+
     #
     # @property
     # def objects(self):

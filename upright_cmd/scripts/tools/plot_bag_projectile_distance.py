@@ -41,9 +41,7 @@ def main():
         projectile_msgs, normalize_time=False
     )
 
-    proj_est_msgs = [
-        msg for _, msg, _ in bag.read_messages("/projectile/joint_states")
-    ]
+    proj_est_msgs = [msg for _, msg, _ in bag.read_messages("/projectile/joint_states")]
     proj_est_ts = ros_utils.parse_time(proj_est_msgs, normalize_time=False)
     proj_pos_est = np.array([msg.position for msg in proj_est_msgs])
 

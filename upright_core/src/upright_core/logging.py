@@ -386,9 +386,7 @@ class DataPlotter:
 
         if "ddC_we_norm" in self.data:
             self.plot_value_vs_time(
-                "ddC_we_norm",
-                ylabel="ddC_we norm",
-                title="ddC_we norm",
+                "ddC_we_norm", ylabel="ddC_we norm", title="ddC_we norm"
             )
 
         if "collision_pair_distances" in self.data:
@@ -424,11 +422,7 @@ class DataPlotter:
             )
 
         if "cost" in self.data:
-            self.plot_value_vs_time(
-                "cost",
-                ylabel="Cost",
-                title="Controller cost",
-            )
+            self.plot_value_vs_time("cost", ylabel="Cost", title="Controller cost")
 
         if "alignment_constraints" in self.data:
             self.plot_value_vs_time(
@@ -440,9 +434,7 @@ class DataPlotter:
 
         if "alignment_cost" in self.data:
             self.plot_value_vs_time(
-                "alignment_cost",
-                ylabel="Cost value",
-                title="Inertial alignment cost",
+                "alignment_cost", ylabel="Cost value", title="Inertial alignment cost"
             )
 
         if show:

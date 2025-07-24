@@ -26,7 +26,9 @@ def main():
     mpc_obs_msgs = [
         msg for _, msg, _ in bag.read_messages("/mobile_manipulator_mpc_observation")
     ]
-    ts, xs, us = rosi.parsing.parse_mpc_observation_msgs(mpc_obs_msgs, normalize_time=True)
+    ts, xs, us = rosi.parsing.parse_mpc_observation_msgs(
+        mpc_obs_msgs, normalize_time=True
+    )
 
     n = len(ts)
 

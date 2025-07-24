@@ -33,7 +33,7 @@ def main():
     robot.forward(x)
     r = robot.link_pose()[0]
     for i in range(settings.dims.o):
-        q[i*3:(i+1)*3] += r
+        q[i * 3 : (i + 1) * 3] += r
 
     robot.forward_qva(q)
 

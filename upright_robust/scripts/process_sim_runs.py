@@ -98,11 +98,7 @@ def compute_run_data(directory, check_constraints=True, exact_params=False, mu=N
     if check_constraints:
         # no approx_inertia because we want the actual realizable bounds
         objects, contacts = rob.parse_objects_and_contacts(
-            ctrl_config,
-            model=model,
-            compute_bounds=True,
-            approx_inertia=False,
-            mu=mu,
+            ctrl_config, model=model, compute_bounds=True, approx_inertia=False, mu=mu
         )
 
         obj0 = list(objects.values())[0]
@@ -299,9 +295,7 @@ def main():
         help="Assume no uncertainty in the inertial parameters.",
     )
     parser.add_argument(
-        "--mu",
-        type=float,
-        help="Friction coefficient to compute violation.",
+        "--mu", type=float, help="Friction coefficient to compute violation."
     )
     args = parser.parse_args()
 

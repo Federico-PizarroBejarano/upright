@@ -50,6 +50,7 @@ def savgol(x, y, window_length, polyorder, deriv=0):
 
 class FilterUpdater:
     """Add sliders to a plot to control SavGol filter window size and poly order."""
+
     def __init__(
         self, fig, lines, positions, window_size, polyorder, delta=1.0, deriv=0
     ):
@@ -155,7 +156,9 @@ def main():
     (l1,) = plt.plot(ts, smooth_velocities[:, 0], label="x", color=palette[0])
     (l2,) = plt.plot(ts, smooth_velocities[:, 1], label="y", color=palette[1])
     (l3,) = plt.plot(ts, smooth_velocities[:, 2], label="z", color=palette[2])
-    (l4,) = plt.plot(ts, np.linalg.norm(smooth_velocities, axis=1), label="norm", color=palette[3])
+    (l4,) = plt.plot(
+        ts, np.linalg.norm(smooth_velocities, axis=1), label="norm", color=palette[3]
+    )
     plt.title("EE velocity")
     plt.xlabel("Time [s]")
     plt.ylabel("Velocity [m/s]")
@@ -174,7 +177,9 @@ def main():
     (l1,) = plt.plot(ts, smooth_accelerations[:, 0], label="x", color=palette[0])
     (l2,) = plt.plot(ts, smooth_accelerations[:, 1], label="y", color=palette[1])
     (l3,) = plt.plot(ts, smooth_accelerations[:, 2], label="z", color=palette[2])
-    (l4,) = plt.plot(ts, np.linalg.norm(smooth_accelerations, axis=1), label="norm", color=palette[3])
+    (l4,) = plt.plot(
+        ts, np.linalg.norm(smooth_accelerations, axis=1), label="norm", color=palette[3]
+    )
     plt.title("EE acceleration")
     plt.xlabel("Time [s]")
     plt.ylabel("Acceleration [m/s]")

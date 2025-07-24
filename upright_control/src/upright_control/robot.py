@@ -100,9 +100,7 @@ def build_robot_interfaces(settings):
     )
     mapping = bindings.SystemPinocchioMapping(settings.dims)
     robot = UprightRobotKinematics(
-        model=model,
-        mapping=mapping,
-        tool_link_name=settings.end_effector_link_name,
+        model=model, mapping=mapping, tool_link_name=settings.end_effector_link_name
     )
 
     # build geometry

@@ -36,11 +36,14 @@ class RobustContactPoint:
         # this is w.r.t. the first object (since the normal points into the
         # first object)
         # fmt: off
-        self.S = np.vstack([
-            self.normal + μ * self.span[0, :],
-            self.normal + μ * self.span[1, :],
-            self.normal - μ * self.span[0, :],
-            self.normal - μ * self.span[1, :]]).T
+        self.S = np.vstack(
+            [
+                self.normal + μ * self.span[0, :],
+                self.normal + μ * self.span[1, :],
+                self.normal - μ * self.span[0, :],
+                self.normal - μ * self.span[1, :],
+            ]
+        ).T
         # fmt: on
 
 

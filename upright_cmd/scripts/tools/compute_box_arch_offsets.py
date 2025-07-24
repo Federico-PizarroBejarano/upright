@@ -6,9 +6,9 @@ import IPython
 
 side_lengths = np.array([0.103, 0.09, 0.038])
 
-Rx = rotx(0.5*np.pi)
-Ry = roty(0.5*np.pi)
-Rz = rotz(0.5*np.pi)
+Rx = rotx(0.5 * np.pi)
+Ry = roty(0.5 * np.pi)
+Rz = rotz(0.5 * np.pi)
 
 box1_dims = box2_dims = np.abs(Ry @ side_lengths)
 box3_dims = side_lengths

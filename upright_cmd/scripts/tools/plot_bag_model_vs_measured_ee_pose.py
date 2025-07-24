@@ -40,11 +40,16 @@ def main():
     tray_msgs = [
         msg for _, msg, _ in bag.read_messages("/vicon/ThingWoodTray/ThingWoodTray")
     ]
-    ts2 = np.array([
-        t.to_sec() for _, _, t in bag.read_messages("/vicon/ThingWoodTray/ThingWoodTray")
-    ])
+    ts2 = np.array(
+        [
+            t.to_sec()
+            for _, _, t in bag.read_messages("/vicon/ThingWoodTray/ThingWoodTray")
+        ]
+    )
 
-    ts, tray_poses = ros_utils.parse_transform_stamped_msgs(tray_msgs, normalize_time=False)
+    ts, tray_poses = ros_utils.parse_transform_stamped_msgs(
+        tray_msgs, normalize_time=False
+    )
 
     try:
         first_policy_time = next(bag.read_messages("/mobile_manipulator_mpc_policy"))[

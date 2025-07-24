@@ -68,7 +68,7 @@ def rollout_kalman(ts, rs, r0, v0, g):
 
     # noise covariance
     dt_nom = 0.01
-    R = dt_nom**2 * np.eye(3)
+    R = dt_nom ** 2 * np.eye(3)
 
     # acceleration variance
     var_a = 1000
@@ -93,7 +93,7 @@ def rollout_kalman(ts, rs, r0, v0, g):
         dt = ts[i] - ts[i - 1]
 
         Ai = np.eye(6) + dt * A
-        Bi = np.vstack((0.5 * dt**2 * np.eye(3), dt * np.eye(3)))
+        Bi = np.vstack((0.5 * dt ** 2 * np.eye(3), dt * np.eye(3)))
 
         # NOTE: doing this is key! (rather than having no off-diagonal elements)
         Qi = var_a * Bi @ Bi.T
@@ -132,7 +132,9 @@ def main():
 
     bag = rosbag.Bag(args.bagfile)
 
-    msgs = [msg for _, msg, _ in bag.read_messages("/vicon/ThingVolleyBall/ThingVolleyBall")]
+    msgs = [
+        msg for _, msg, _ in bag.read_messages("/vicon/ThingVolleyBall/ThingVolleyBall")
+    ]
     positions = []
     for msg in msgs:
         p = msg.transform.translation
