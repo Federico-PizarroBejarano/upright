@@ -69,7 +69,7 @@ gravity: list of float, length 3    # Gravity vector.
 
 # Upright uses OCS2's auto-differentiation + code generation to automatically compute gradients of costs and constraints.
 # Set this to `true` to recompile each time, or `false` to skip this step.
-# Only set to `true` if running the same controller setup repeatedly (i.e., same object arrangments and constraints; the waypoints can change).
+# Only set to `false` if running the same controller setup repeatedly (i.e., same object arrangments and constraints; the waypoints can change).
 recompile_libraries: bool
 
 # Enable extra debugging information. Currently, this is used to print and publish more information from the MRT node in `upright_ros_interface/src/mrt_node.cpp`.
@@ -359,7 +359,7 @@ weights:
     diag: list of float, non-negative
   end_effector:  # EE pose weight.
     scale: float, non-negative
-    diag: list of float, non-negative, length 3  # 3 position DOFs, 3 orientation DOFs.
+    diag: list of float, non-negative, length 6  # 3 position DOFs, 3 orientation DOFs.
 
 # State and input limits.
 limits:
