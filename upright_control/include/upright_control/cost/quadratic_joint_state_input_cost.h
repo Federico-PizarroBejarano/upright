@@ -27,7 +27,9 @@ class QuadraticJointStateInputCost final
     std::pair<VecXd, VecXd> getStateInputDeviation(
         ocs2::scalar_t time, const VecXd& state, const VecXd& input,
         const ocs2::TargetTrajectories& targetTrajectories) const override {
-        return {state - xd_, input};
+        // Track input relative to the desired input from the target trajectory
+        const VecXd u_ref = targetTrajectories.getDesiredInput(time);
+        return {state - xd_, input - u_ref};
     }
 
     VecXd xd_;

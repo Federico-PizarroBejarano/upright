@@ -249,10 +249,10 @@ ControllerInterface::ControllerInterface(const ControllerSettings& settings)
     // problem_.stateCostPtr->add("end_effector_cost",
     //                            std::move(end_effector_cost));
 
-    // Final position/state
-    problem_.finalEqualityConstraintPtr->add(
-        "stationary_desired_position_constraint",
-        get_stationary_desired_position_constraint(end_effector_kinematics));
+    // // Final position/state
+    // problem_.finalEqualityConstraintPtr->add(
+    //     "stationary_desired_position_constraint",
+    //     get_stationary_desired_position_constraint(end_effector_kinematics));
 
     // End effector position box constraint
     if (settings_.end_effector_box_constraint_enabled) {

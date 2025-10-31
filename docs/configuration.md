@@ -168,6 +168,9 @@ balancing:
   # Weight on the contact forces in the objective function.
   force_weight: float, non-negative
 
+  # Whether to do frictionless constraints
+  frictionless: bool
+
 # Settings for the inertial alignment method, an alternative to the balancing constraints.
 # Inertial alignment tries to tilt the tray so that its normal is always aligned opposite to the gravito-inertial acceleration.
 inertial_alignment:

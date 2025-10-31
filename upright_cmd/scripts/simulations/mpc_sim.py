@@ -11,7 +11,7 @@ import upright_control as ctrl
 import upright_cmd as cmd
 
 
-def main():
+def main(mpsf=False):
     cli_args = cmd.cli.sim_arg_parser().parse_args()
 
     # load configuration
@@ -25,7 +25,7 @@ def main():
         config=sim_config,
         timestamp=timestamp,
         video_name=cli_args.video,
-        gui=False,
+        gui=True,
         extra_gui=sim_config.get("extra_gui", False),
     )
 
@@ -37,7 +37,10 @@ def main():
     u = np.zeros(env.robot.nu)
 
     # controller
-    ctrl_manager = ctrl.manager.ControllerManager.from_config(ctrl_config, x0=x)
+    if mpsf:
+        ctrl_manager = ctrl.mpsf.MPSFControllerManager.from_config(ctrl_config, x0=x)
+    else:
+        ctrl_manager = ctrl.manager.ControllerManager.from_config(ctrl_config, x0=x)
     dims = ctrl_manager.model.settings.dims
     ref = ctrl_manager.ref
 
@@ -49,15 +52,22 @@ def main():
     v_cmd = np.zeros_like(v)
     a_est = np.zeros_like(a)
 
+    u_desired = np.zeros(dims.u())
+
     # simulation loop
     while t <= env.duration:
+        print('Time (s):', np.round(t, 2))
+        print('---------------')
         q, v = env.robot.joint_states(add_noise=False)
         x = np.concatenate((q, v, a_est))
 
         # compute policy - MPC is re-optimized automatically when the internal
         # MPC timestep has been exceeded
-        u = ctrl_manager.step(t, x)[1]
-        u_cmd = u[: dims.robot.u]
+        if mpsf:
+            u = ctrl_manager.step(t, x, u_desired)[1]
+        else:
+            u = ctrl_manager.step(t, x)[1]
+        u_cmd = u[:dims.robot.u]
 
         # integrate the command
         # it appears to be desirable to open-loop integrate velocity like this
@@ -73,4 +83,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(mpsf=True)
