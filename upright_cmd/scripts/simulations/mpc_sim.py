@@ -43,6 +43,7 @@ def main(mpsf=False):
         ctrl_manager = ctrl.manager.ControllerManager.from_config(ctrl_config, x0=x)
     dims = ctrl_manager.model.settings.dims
     ref = ctrl_manager.ref
+    ctrl_manager.warmstart()
 
     # frames for desired waypoints
     if sim_config.get("show_debug_frames", False):
