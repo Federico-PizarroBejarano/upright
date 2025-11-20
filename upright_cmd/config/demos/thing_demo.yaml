@@ -35,7 +35,7 @@ controller:
   balancing:
     enabled: true
     use_force_constraints: true
-    frictionless: true
+    frictionless: false
     arrangement: pink_bottle
     constraint_type: hard
 

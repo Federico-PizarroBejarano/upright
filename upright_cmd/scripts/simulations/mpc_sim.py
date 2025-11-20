@@ -25,7 +25,7 @@ def main(mpsf=False):
         config=sim_config,
         timestamp=timestamp,
         video_name=cli_args.video,
-        gui=True,
+        gui=False,
         extra_gui=sim_config.get("extra_gui", False),
     )
 
@@ -57,7 +57,7 @@ def main(mpsf=False):
 
     # simulation loop
     while t <= env.duration:
-        print('Time (s):', np.round(t, 2))
+        print('\nTime (s):', np.round(t, 2))
         print('---------------')
         q, v = env.robot.joint_states(add_noise=False)
         x = np.concatenate((q, v, a_est))
@@ -69,6 +69,10 @@ def main(mpsf=False):
         else:
             u = ctrl_manager.step(t, x)[1]
         u_cmd = u[:dims.robot.u]
+        print('q:', np.round(q, 2))
+        print('v:', np.round(v, 2))
+        print('a:', np.round(a_est, 2))
+        print('u:', np.round(u_cmd, 2))
 
         # integrate the command
         # it appears to be desirable to open-loop integrate velocity like this

@@ -22,6 +22,7 @@ class MPSFControllerManager:
         self.timestep = timestep
 
         # MPC
+        self.model.settings.input_weight = np.eye(self.model.settings.dims.robot.u)
         self.model.settings.state_weight = np.zeros((self.model.settings.dims.x(),
                                                      self.model.settings.dims.x()))
         self.model.settings.end_effector_weight = np.zeros((6, 6))
